@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.example.administrator.printkakao_retry"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+            additionalParameters('jack.incremental': 'true')
+        }
+    }
+
+    buildTypes {
+        /*
+        debug {
+            minifyEnabled true
+           // useProgaurd false
+        }
+        */
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
+
+    compileOptions {
+        incremental true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        javaMaxHeapSize '4g'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    testCompile 'junit:junit:4.12'
+
+    compile group: 'org.ahocorasick', name: 'ahocorasick', version: '0.3.0'
+    compile 'com.github.shineware:commons:1.0.0'
+    compile 'org.slf4j:slf4j-api:1.7.13'
+
+    // https://mvnrepository.com/artifact/com.google.collections/google-collections
+    compile group: 'com.google.collections', name: 'google-collections', version: '1.0'
+}
